@@ -298,12 +298,12 @@
             const isLocalServer = window.location.protocol.startsWith('http');
             const seed = Math.floor(Math.random() * 10000);
 
-            // Simplified prompt for URL reliability in live environments
-            const coreDescription = `${currentMonster.size} ${currentMonster.type} monster, dark fantasy aesthetic, highly detailed illustration`;
+            // High-fidelity prompt for live environments
+            const highFidelityPrompt = `high fidelity fantasy painting, detailed monster art, ${currentMonster.size} ${currentMonster.type} called ${currentMonster.name}, ${currentMonster.description}, cinematic lighting, dark fantasy, artstation style, 8k resolution`;
 
             const imageUrl = isLocalServer
-                ? `/api/generate-image?prompt=${encodeURIComponent(coreDescription)}&seed=${seed}`
-                : `https://pollinations.ai/p/${encodeURIComponent(coreDescription)}?width=800&height=1000&seed=${seed}&nologo=true`;
+                ? `/api/generate-image?prompt=${encodeURIComponent(highFidelityPrompt)}&seed=${seed}`
+                : `https://image.pollinations.ai/prompt/${encodeURIComponent(highFidelityPrompt)}?width=800&height=1000&seed=${seed}&nologo=true`;
 
             console.log(`LoreForge Environment: ${isLocalServer ? 'LIVE/SERVER' : 'LOCAL FILE'}`);
 

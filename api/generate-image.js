@@ -5,7 +5,8 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    const imageUrl = `https://pollinations.ai/p/${encodeURIComponent(prompt)}?width=800&height=1000&seed=${seed || 42}&nologo=true`;
+    // Using the dedicated image endpoint for raw data
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=800&height=1000&seed=${seed || 42}&nologo=true`;
 
     try {
         const response = await fetch(imageUrl);
