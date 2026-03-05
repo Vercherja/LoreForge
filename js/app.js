@@ -379,8 +379,8 @@
 
                         <div class="secondary-stats">
                             <p><strong>Skills</strong> Perception +${monster.saves.wis + 2}, Stealth +${monster.saves.dex + 2}</p>
-                            <p><strong>Damage Immunities</strong> Poison, Psychic</p>
-                            <p><strong>Condition Immunities</strong> Poisoned, Frightened</p>
+                            <p><strong>Damage Immunities</strong> ${highlightTags('Poison, Psychic')}</p>
+                            <p><strong>Condition Immunities</strong> ${highlightTags('Poisoned, Frightened')}</p>
                             <p><strong>Senses</strong> Darkvision 60 ft., Passive Perception ${10 + monster.saves.wis + 2}</p>
                             <p><strong>Languages</strong> Common, Deep Speech</p>
                             <p><strong>Challenge</strong> ${monster.cr} (XP ${monster.cr * 100}) <strong>Proficiency Bonus (PB)</strong> +${monster.pb}</p>
