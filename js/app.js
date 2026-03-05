@@ -294,16 +294,18 @@
                 </div>
             `;
 
-            // Detect if running on a live server vs local file
-            const isLocalFile = window.location.protocol === 'file:';
+            // Detect if running on a live server (http/https) vs local file
+            const isLocalServer = window.location.protocol.startsWith('http');
             const seed = Math.floor(Math.random() * 10000);
-            const promptValue = `high fidelity fantasy painting, detailed monster art, ${currentMonster.size} ${currentMonster.type} called ${currentMonster.name}, ${currentMonster.description}, cinematic lighting, dark fantasy, artstation style, 8k resolution`;
 
-            // In a live environment, we use our serverless API proxy to bypass CORS/security issues
-            // Locally, we still try the direct URL but expect possible blocks
-            const imageUrl = isLocalFile
-                ? `https://pollinations.ai/p/${encodeURIComponent(promptValue)}?width=800&height=1000&seed=${seed}&nologo=true`
-                : `/api/generate-image?prompt=${encodeURIComponent(promptValue)}&seed=${seed}`;
+            // Simplified prompt for URL reliability in live environments
+            const coreDescription = `${currentMonster.size} ${currentMonster.type} monster, dark fantasy aesthetic, highly detailed illustration`;
+
+            const imageUrl = isLocalServer
+                ? `/api/generate-image?prompt=${encodeURIComponent(coreDescription)}&seed=${seed}`
+                : `https://pollinations.ai/p/${encodeURIComponent(coreDescription)}?width=800&height=1000&seed=${seed}&nologo=true`;
+
+            console.log(`LoreForge Environment: ${isLocalServer ? 'LIVE/SERVER' : 'LOCAL FILE'}`);
 
             // Fallback strategy
             const getFallbackImage = (type) => {
@@ -329,7 +331,7 @@
 
                 const hint = document.createElement('div');
                 hint.style.cssText = 'position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.6); font-size: 0.5rem; color: #fff; text-align: center; padding: 2px;';
-                hint.textContent = 'Archival Mode (CORS Restricted)';
+                hint.textContent = isLocalServer ? 'Manifestation Interrupted (API Error)' : 'Archival Mode (CORS Restricted)';
                 imageContainer.appendChild(hint);
             };
             img.src = imageUrl;
