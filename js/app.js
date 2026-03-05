@@ -1,53 +1,89 @@
-// LoreForge - Combined Logic & Data
+// LoreForge - Advanced Stat Block Engine (2024 Style)
 (function () {
     const MONSTER_DATA = {
         types: [
             {
-                name: 'Aberration', traits: ['Antimagic Field', 'Telepathy', 'Amorphous'], actions: ['Psychic Blast', 'Tentacle Lash'],
+                name: 'Aberration', traits: ['Antimagic Field', 'Telepathy', 'Amorphous', 'Magic Resistance'],
+                actions: ['Psychic Blast', 'Tentacle Lash', 'Mind Crush'],
+                bonusActions: ['Ethereal Shift', 'Psychic Mirror'],
+                reactions: ['Gaze of Confusion'],
                 lore: "Born from the far realms beyond space and time, these entities defy natural laws."
             },
             {
-                name: 'Beast', traits: ['Pack Tactics', 'Keen Senses', 'Pounce'], actions: ['Bite', 'Claw', 'Gore'],
+                name: 'Beast', traits: ['Pack Tactics', 'Keen Senses', 'Pounce', 'Relentless'],
+                actions: ['Bite', 'Claw', 'Gore'],
+                bonusActions: ['Aggressive Burst', 'Dash'],
+                reactions: ['Vengeful Snap'],
                 lore: "Apex predators of the natural world, driven by instinct and primal savagery."
             },
             {
-                name: 'Construct', traits: ['Antimagic Susceptibility', 'Magic Resistance', 'Immutable Form'], actions: ['Slam', 'Force Beam'],
+                name: 'Construct', traits: ['Immutable Form', 'Magic Resistance', 'Siege Monster'],
+                actions: ['Slam', 'Force Beam', 'Multiattack'],
+                bonusActions: ['Overdrive', 'Self-Repair'],
+                reactions: ['Reactive Armor'],
                 lore: "Artificially animated through ancient rituals or forgotten engineering."
             },
             {
-                name: 'Dragon', traits: ['Legendary Resistance', 'Frightful Presence'], actions: ['Breathe Fire', 'Multiattack', 'Tail Swipe'],
+                name: 'Dragon', traits: ['Legendary Resistance', 'Frightful Presence', 'Amphibious'],
+                actions: ['Breathe Fire', 'Multiattack', 'Tail Swipe'],
+                bonusActions: ['Draconic Roar', 'Wing Attack'],
+                reactions: ['Tail Snub'],
                 lore: "The undisputed masters of the skies, hoarding power and wealth for eons."
             },
             {
-                name: 'Elemental', traits: ['Elemental Form', 'Illumination'], actions: ['slab', 'Elemental Ray'],
+                name: 'Elemental', traits: ['Elemental Form', 'Illumination', 'Magic Resistance'],
+                actions: ['Slam', 'Elemental Ray', 'Whirlwind'],
+                bonusActions: ['Burst of Speed', 'Elemental Absorption'],
+                reactions: ['Reactive Bloom'],
                 lore: "Incarnations of the core forces of nature, bound to this plane by raw will."
             },
             {
-                name: 'Fey', traits: ['Magic Resistance', 'Fey Ancestry'], actions: ['Charm', 'Sylvan Dagger'],
+                name: 'Fey', traits: ['Magic Resistance', 'Fey Ancestry', 'Innate Spellcasting'],
+                actions: ['Charm', 'Sylvan Dagger', 'Glimmer Step'],
+                bonusActions: ['Misty Step', 'Mirror Image'],
+                reactions: ['Trickster\'s Flash'],
                 lore: "Denizens of the Feywild, as beautiful as they are capricious and deadly."
             },
             {
-                name: 'Fiend', traits: ['Magic Resistance', 'Devil\'s Sight'], actions: ['Hellfire Orb', 'Spiked Chain'],
+                name: 'Fiend', traits: ['Magic Resistance', 'Devil\'s Sight', 'Magic Weapons'],
+                actions: ['Hellfire Orb', 'Spiked Chain', 'Multiattack'],
+                bonusActions: ['Infernal Step', 'Summon Minor Fiend'],
+                reactions: ['Hellish Rebuke'],
                 lore: "Corrupted souls from the lower planes, existing only to spread misery."
             },
             {
-                name: 'Giant', traits: ['Aggressive', 'Siege Monster'], actions: ['Rock Throw', 'Greatclub'],
+                name: 'Giant', traits: ['Aggressive', 'Siege Monster', 'Keen Senses'],
+                actions: ['Rock Throw', 'Greatclub', 'Stomp'],
+                bonusActions: ['Roar of Submission'],
+                reactions: ['Boulder Guard'],
                 lore: "Titans of old, whose footsteps once shaped the very mountains they inhabit."
             },
             {
-                name: 'Monstrosity', traits: ['Magic Resistance', 'Keen Senses'], actions: ['Multiattack', 'Bite'],
+                name: 'Monstrosity', traits: ['Magic Resistance', 'Keen Senses', 'Amphibious'],
+                actions: ['Multiattack', 'Bite', 'Leap'],
+                bonusActions: ['Savage Hunger'],
+                reactions: ['Thick Hide'],
                 lore: "Abominations created through dark magic or twisted evolutionary paths."
             },
             {
-                name: 'Ooze', traits: ['Amorphous', 'Corrosive Form'], actions: ['Pseudopod', 'Engulf'],
+                name: 'Ooze', traits: ['Amorphous', 'Corrosive Form', 'Spider Climb'],
+                actions: ['Pseudopod', 'Engulf', 'Acid Spit'],
+                bonusActions: ['Split (Small Piece)'],
+                reactions: ['Sticky Trap'],
                 lore: "Mindless predators that dissolve everything in their path with relentless hunger."
             },
             {
-                name: 'Plant', traits: ['False Appearance', 'Thorn Body'], actions: ['Vine Lash', 'Spore Burst'],
+                name: 'Plant', traits: ['False Appearance', 'Thorn Body', 'Regeneration'],
+                actions: ['Vine Lash', 'Spore Burst', 'Entangle'],
+                bonusActions: ['Photosynthesis Bloom'],
+                reactions: ['Reactive Spores'],
                 lore: "Sentient flora that have claimed the deep wilds as their own."
             },
             {
-                name: 'Undead', traits: ['Undead Fortitude', 'Incorporeal Movement'], actions: ['Life Drain', 'Wither'],
+                name: 'Undead', traits: ['Undead Fortitude', 'Incorporeal Movement', 'Ethereal Sight'],
+                actions: ['Life Drain', 'Wither', 'Spectral Touch'],
+                bonusActions: ['Frightful Presence', 'Phase Out'],
+                reactions: ['Death Throes'],
                 lore: "The restless spirits and reanimated remains of those who refused to pass on."
             }
         ],
@@ -81,7 +117,14 @@
             suffixes: ['stalker', 'weaver', 'crusher', 'drinker', 'breaker', 'shaper', 'bane', 'reaper', 'fang', 'wing']
         },
         alignments: ['Lawful Good', 'Neutral Good', 'Chaotic Good', 'Lawful Neutral', 'True Neutral', 'Chaotic Neutral', 'Lawful Evil', 'Neutral Evil', 'Chaotic Evil'],
-        sizes: ['Tiny', 'Small', 'Medium', 'Large', 'Huge', 'Gargantuan']
+        sizes: [
+            { name: 'Tiny', hd: 'd4' },
+            { name: 'Small', hd: 'd6' },
+            { name: 'Medium', hd: 'd8' },
+            { name: 'Large', hd: 'd10' },
+            { name: 'Huge', hd: 'd12' },
+            { name: 'Gargantuan', hd: 'd20' }
+        ]
     };
 
     class MonsterGenerator {
@@ -92,12 +135,19 @@
         generate(params = {}) {
             const typeObj = this._getType(params.type);
             const name = this._generateName(typeObj.name);
-            const size = this._getSize();
+            const sizeObj = this._getSize();
             const cr = params.cr || Math.floor(Math.random() * 30);
+            const pb = this._calculatePB(cr);
             const alignment = this._getAlignment();
             const stats = this._generateStats(cr);
             const traits = this._getAbilities(typeObj.traits, 2);
             const actions = this._getAbilities(typeObj.actions, 2);
+            const bonusActions = this._getAbilities(typeObj.bonusActions, 1);
+            const reactions = this._getAbilities(typeObj.reactions, 1);
+
+            const hpData = this._generateHP(sizeObj, stats.con, cr);
+            const saves = this._generateSaves(stats, pb, typeObj.name);
+            const initiative = { mod: Math.floor((stats.dex - 10) / 2), score: 10 + Math.floor((stats.dex - 10) / 2) };
 
             // Generate Lore
             const loreText = this._generateLore(name, typeObj.lore);
@@ -106,18 +156,66 @@
             return {
                 name,
                 type: typeObj.name,
-                size,
+                size: sizeObj.name,
                 alignment,
                 cr,
-                ac: 10 + Math.floor(cr / 2) + Math.floor(stats.dex / 4),
-                hp: (cr + 1) * 10 + Math.floor(Math.random() * 20),
+                pb,
+                ac: 10 + Math.floor(cr / 2) + Math.floor((stats.dex - 10) / 4),
+                hp: hpData,
+                initiative,
                 stats,
+                saves,
                 traits,
                 actions,
+                bonusActions,
+                reactions,
                 lore: loreText,
                 mythos: mythosText,
-                description: `A ${size.toLowerCase()} ${typeObj.name.toLowerCase()}, feared for its ${traits[0].toLowerCase()} and ${actions[0].toLowerCase()}.`
+                description: `A ${sizeObj.name.toLowerCase()} ${typeObj.name.toLowerCase()}, known for its ${traits[0].toLowerCase()} and its devastating ${actions[0].toLowerCase()}.`
             };
+        }
+
+        _calculatePB(cr) {
+            return 2 + Math.floor((cr - 1) / 4);
+        }
+
+        _generateHP(sizeObj, con, cr) {
+            const diceCount = Math.max(1, cr + 1);
+            const dieValue = parseInt(sizeObj.hd.replace('d', ''));
+            const conMod = Math.floor((con - 10) / 2);
+            const total = Math.max(1, Math.floor(diceCount * (dieValue / 2 + 0.5)) + (diceCount * conMod));
+            return {
+                total,
+                formula: `${diceCount}${sizeObj.hd} ${conMod >= 0 ? '+' : '-'} ${Math.abs(diceCount * conMod)}`
+            };
+        }
+
+        _generateSaves(stats, pb, type) {
+            const saves = {};
+            const proficient = this._getSavingThrowProficiencies(type);
+            ['str', 'dex', 'con', 'int', 'wis', 'cha'].forEach(stat => {
+                const mod = Math.floor((stats[stat] - 10) / 2);
+                saves[stat] = proficient.includes(stat) ? mod + pb : mod;
+            });
+            return saves;
+        }
+
+        _getSavingThrowProficiencies(type) {
+            const map = {
+                'Aberration': ['int', 'wis', 'cha'],
+                'Beast': ['str', 'dex'],
+                'Construct': ['con', 'str'],
+                'Dragon': ['dex', 'con', 'wis', 'cha'],
+                'Elemental': ['con', 'wis'],
+                'Fey': ['dex', 'cha'],
+                'Fiend': ['con', 'wis', 'cha'],
+                'Giant': ['str', 'con'],
+                'Monstrosity': ['str', 'con'],
+                'Ooze': ['con'],
+                'Plant': ['con', 'wis'],
+                'Undead': ['con', 'wis']
+            };
+            return map[type] || ['str', 'con'];
         }
 
         _generateLore(name, typeLore) {
@@ -152,6 +250,7 @@
         }
 
         _getAbilities(list, count) {
+            if (!list) return [];
             const shuffled = [...list].sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
@@ -190,7 +289,6 @@
         const exportPdfBtn = document.getElementById('export-pdf-btn');
 
         const monsterCard = document.getElementById('monster-card');
-        const generateImageBtn = document.getElementById('generate-image-btn');
         const cardActions = document.getElementById('card-actions');
 
         let currentMonster = null;
@@ -218,7 +316,7 @@
             const element = document.getElementById('monster-card');
             const opt = {
                 margin: 0.5,
-                filename: `${currentMonster.name}_bestiary.pdf`,
+                filename: `${currentMonster.name}_2024_Bestiary.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -229,121 +327,85 @@
         const renderMonster = (monster) => {
             monsterCard.classList.remove('empty-state');
             cardActions.classList.remove('hidden');
-            generateImageBtn.classList.remove('hidden');
+
+            const getMod = (val) => {
+                const mod = Math.floor((val - 10) / 2);
+                return mod >= 0 ? `+${mod}` : mod;
+            };
+
+            const formatSave = (val) => val >= 0 ? `+${val}` : val;
+
+            const highlightTags = (text) => {
+                return text
+                    .replace(/(Poisoned|Frightened|Incapacitated|Prone|Grappled|Restrained|Stunned|Paralyzed|Unconscious)/g, '<span class="keyword-condition">$1</span>')
+                    .replace(/(Multiattack|Dash|Disengage|Hide|Bite|Claw|Slam|Rock Throw|Greatclub)/g, '<span class="keyword-action">$1</span>')
+                    .replace(/(Armor|Shield|Sword|Dagger|Mace|Crossbow|Bow)/g, '<span class="keyword-gear">$1</span>');
+            };
 
             monsterCard.innerHTML = `
-                <div class="monster-header-layout">
-                    <div id="monster-image" class="monster-image-container">
-                        <div class="ritual-placeholder" style="height: 100%;">
-                            <div class="rune-circle" style="width: 100px; height: 100px;"></div>
-                            <p style="font-size: 0.8rem; color: #8b0000;">Ritual for Image Manifestation</p>
-                        </div>
+                <div class="monster-handbook-container">
+                    <div class="monster-header">
+                        <h1>${monster.name}</h1>
+                        <p class="monster-meta">${monster.size} ${monster.type}, ${monster.alignment}</p>
                     </div>
-                    <div class="monster-lore-column">
-                        <h2>The ${monster.name}</h2>
-                        <p>${monster.lore}</p>
-                        <hr class="red-rule">
-                        <p style="font-style: italic;">"${monster.mythos}"</p>
-                    </div>
-                </div>
 
-                <div class="stat-block-container">
-                    <div class="stat-block-column">
-                        <h3>${monster.name}</h3>
-                        <p style="font-style: italic; color: #444;">${monster.size} ${monster.type}, ${monster.alignment}</p>
-                        <hr>
-                        <div class="stat-group"><strong>Armor Class</strong> ${monster.ac}</div>
-                        <div class="stat-group"><strong>Hit Points</strong> ${monster.hp}</div>
-                        <div class="stat-group"><strong>Speed</strong> 30 ft.</div>
-                        <hr>
-                        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); text-align: center; margin: 1rem 0;">
-                            <div><strong>STR</strong><br>${monster.stats.str}</div>
-                            <div><strong>DEX</strong><br>${monster.stats.dex}</div>
-                            <div><strong>CON</strong><br>${monster.stats.con}</div>
-                            <div><strong>INT</strong><br>${monster.stats.int}</div>
-                            <div><strong>WIS</strong><br>${monster.stats.wis}</div>
-                            <div><strong>CHA</strong><br>${monster.stats.cha}</div>
-                        </div>
-                        <hr>
-                        <div class="stat-group"><strong>Challenge</strong> ${monster.cr}</div>
-                        <hr>
+                    <div class="monster-intro">
+                        <p class="lore-text">${monster.lore}</p>
+                        <p class="mythos-text">"${monster.mythos}"</p>
                     </div>
-                    
-                    <div class="stat-block-column">
-                        <h4 style="color: #8b0000; font-family: 'Cinzel', serif; border-bottom: 2px solid #8b0000;">Traits</h4>
-                        ${monster.traits.map(t => `<p><strong>${t}.</strong> Key trait identifying this creature type.</p>`).join('')}
-                        
-                        <h4 style="color: #8b0000; font-family: 'Cinzel', serif; border-bottom: 2px solid #8b0000; margin-top: 1rem;">Actions</h4>
-                        ${monster.actions.map(a => `<p><strong>${a}.</strong> <em>Melee:</em> +${Math.floor(monster.stats.str / 3)} to hit. <em>Hit:</em> 12 damage.</p>`).join('')}
+
+                    <div class="stat-block-2024">
+                        <div class="top-row-stats">
+                            <div class="stat-unit"><strong>Armor Class</strong> <span>${monster.ac}</span></div>
+                            <div class="stat-unit"><strong>Initiative</strong> <span>${monster.initiative.mod >= 0 ? '+' : ''}${monster.initiative.mod} (${monster.initiative.score})</span></div>
+                            <div class="stat-unit"><strong>Hit Points</strong> <span>${monster.hp.total} (${monster.hp.formula})</span></div>
+                            <div class="stat-unit"><strong>Speed</strong> <span>30 ft., fly 60 ft.</span></div>
+                        </div>
+
+                        <div class="ability-scores-2024">
+                            <div class="score-grid-container">
+                                <div class="score-header">SCORE</div>
+                                <div class="score-header">MOD</div>
+                                <div class="score-header">SAVE</div>
+                                
+                                <strong>STR</strong> <div class="score-box">${monster.stats.str}</div> <div class="mod-box">${getMod(monster.stats.str)}</div> <div class="save-box">${formatSave(monster.saves.str)}</div>
+                                <strong>DEX</strong> <div class="score-box">${monster.stats.dex}</div> <div class="mod-box">${getMod(monster.stats.dex)}</div> <div class="save-box">${formatSave(monster.saves.dex)}</div>
+                                <strong>CON</strong> <div class="score-box">${monster.stats.con}</div> <div class="mod-box">${getMod(monster.stats.con)}</div> <div class="save-box">${formatSave(monster.saves.con)}</div>
+                                <strong>INT</strong> <div class="score-box">${monster.stats.int}</div> <div class="mod-box">${getMod(monster.stats.int)}</div> <div class="save-box">${formatSave(monster.saves.int)}</div>
+                                <strong>WIS</strong> <div class="score-box">${monster.stats.wis}</div> <div class="mod-box">${getMod(monster.stats.wis)}</div> <div class="save-box">${formatSave(monster.saves.wis)}</div>
+                                <strong>CHA</strong> <div class="score-box">${monster.stats.cha}</div> <div class="mod-box">${getMod(monster.stats.cha)}</div> <div class="save-box">${formatSave(monster.saves.cha)}</div>
+                            </div>
+                        </div>
+
+                        <div class="secondary-stats">
+                            <p><strong>Skills</strong> Perception +${monster.saves.wis + 2}, Stealth +${monster.saves.dex + 2}</p>
+                            <p><strong>Damage Immunities</strong> Poison, Psychic</p>
+                            <p><strong>Condition Immunities</strong> Poisoned, Frightened</p>
+                            <p><strong>Senses</strong> Darkvision 60 ft., Passive Perception ${10 + monster.saves.wis + 2}</p>
+                            <p><strong>Languages</strong> Common, Deep Speech</p>
+                            <p><strong>Challenge</strong> ${monster.cr} (XP ${monster.cr * 100}) <strong>Proficiency Bonus (PB)</strong> +${monster.pb}</p>
+                        </div>
+
+                        <div class="abilities-section">
+                            <h3 class="section-title">Traits</h3>
+                            ${monster.traits.map(t => `<p class="ability-entry"><strong>${t}.</strong> ${highlightTags('Key passive trait identifying this creature\'s unique nature.')}</p>`).join('')}
+
+                            <h3 class="section-title">Actions</h3>
+                            ${monster.actions.map(a => `<p class="ability-entry"><strong>${a}.</strong> ${highlightTags(`Melee Attack Rolls: +${monster.pb + Math.floor((monster.stats.str - 10) / 2)} to hit, reach 5 ft. Hit: ${7 + Math.floor((monster.stats.str - 10) / 2)} damage.`)}</p>`).join('')}
+
+                            ${monster.bonusActions.length ? `
+                            <h3 class="section-title">Bonus Actions</h3>
+                            ${monster.bonusActions.map(ba => `<p class="ability-entry"><strong>${ba}.</strong> ${highlightTags('A quick maneuver used to gain the upper hand in combat.')}</p>`).join('')}
+                            ` : ''}
+
+                            ${monster.reactions.length ? `
+                            <h3 class="section-title">Reactions</h3>
+                            ${monster.reactions.map(r => `<p class="ability-entry"><strong>${r}.</strong> ${highlightTags('A quick response to an enemy\'s movement or attack.')}</p>`).join('')}
+                            ` : ''}
+                        </div>
                     </div>
                 </div>
             `;
         };
-
-        generateImageBtn.addEventListener('click', () => {
-            if (!currentMonster) return;
-
-            const imageContainer = document.getElementById('monster-image');
-            generateImageBtn.disabled = true;
-            generateImageBtn.innerHTML = '✨ Manifesting...';
-
-            imageContainer.innerHTML = `
-                <div class="manifesting-wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #8b0000;">
-                    <div class="spinner" style="width: 40px; height: 40px; border: 3px solid rgba(139, 0, 0, 0.1); border-top-color: #8b0000; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                    <span style="font-family: var(--font-heading); font-size: 0.8rem; margin-top: 1rem;">Accessing Archives...</span>
-                </div>
-            `;
-
-            // Detect if running on a live server (http/https) vs local file
-            const isLocalServer = window.location.protocol.startsWith('http');
-            const seed = Math.floor(Math.random() * 10000);
-
-            // High-fidelity prompt for live environments
-            const highFidelityPrompt = `high fidelity fantasy painting, detailed monster art, ${currentMonster.size} ${currentMonster.type} called ${currentMonster.name}, ${currentMonster.description}, cinematic lighting, dark fantasy, artstation style, 8k resolution`;
-
-            const imageUrl = isLocalServer
-                ? `/api/generate-image?prompt=${encodeURIComponent(highFidelityPrompt)}&seed=${seed}`
-                : `https://image.pollinations.ai/prompt/${encodeURIComponent(highFidelityPrompt)}?width=800&height=1000&seed=${seed}&nologo=true`;
-
-            console.log(`LoreForge Environment: ${isLocalServer ? 'LIVE/SERVER' : 'LOCAL FILE'}`);
-
-            // Fallback strategy
-            const getFallbackImage = (type) => {
-                const lowerType = type.toLowerCase();
-                if (lowerType === 'dragon') return 'assets/dragon.png';
-                if (['undead', 'fiend', 'aberration', 'ooze'].includes(lowerType)) return 'assets/undead.png';
-                return 'assets/beast.png';
-            };
-
-            const fallbackUrl = getFallbackImage(currentMonster.type);
-
-            const img = new Image();
-            img.onload = () => {
-                imageContainer.innerHTML = `<img src="${imageUrl}" alt="${currentMonster.name}" class="fade-in" style="width: 100%; height: 100%; object-fit: cover;">`;
-                generateImageBtn.disabled = false;
-                generateImageBtn.innerHTML = '✨ Remanifest Portrait';
-            };
-            img.onerror = () => {
-                console.warn('Real-time manifestation blocked or failed. Using archival fallback.');
-                imageContainer.innerHTML = `<img src="${fallbackUrl}" alt="${currentMonster.name}" class="fade-in" style="width: 100%; height: 100%; object-fit: cover;">`;
-                generateImageBtn.disabled = false;
-                generateImageBtn.innerHTML = '✨ Manifest from Archives';
-
-                const hint = document.createElement('div');
-                hint.style.cssText = 'position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.6); font-size: 0.5rem; color: #fff; text-align: center; padding: 2px;';
-                hint.textContent = isLocalServer ? 'Manifestation Interrupted (API Error)' : 'Archival Mode (CORS Restricted)';
-                imageContainer.appendChild(hint);
-            };
-            img.src = imageUrl;
-        });
-
-        if (!document.getElementById('forge-animations')) {
-            const style = document.createElement('style');
-            style.id = 'forge-animations';
-            style.innerHTML = `
-                @keyframes spin { to { transform: rotate(360deg); } }
-            `;
-            document.head.appendChild(style);
-        }
     });
 })();

@@ -1,31 +1,23 @@
-# LoreForge | RPG Monster Generator
+# LoreForge - Advanced RPG Monster Generator
 
-**Master the Grimoire. Forge the Legend.**
+LoreForge is a high-fidelity procedural generation engine for tabletop RPG monsters, specifically designed for the **D&D 2024 handbook** aesthetic.
 
-LoreForge is a high-fidelity, procedural monster generator designed for TTRPG Game Masters. It creates unique creatures with balanced stats, rich procedural lore, and AI-manifested portraits, all presented in a beautiful "Masterwork Handbook" aesthetic.
+## Features
 
-## ✨ Features
-- **Handbook Aesthetic**: Inspired by professional RPG sourcebooks with parchment textures and red-ink accents.
-- **Procedural Lore**: Generates deep histories and mythos for every creature.
-- **Stat Scaling**: Balanced Challenge Rating (CR) scaling for stats, AC, and HP.
-- **AI Portrating**: Uses Pollinations.ai / Nano Banana integration to manifest visual forms.
-- **Bestiary Export**: Save your creations as high-quality PDFs for your campaign notes.
+- **Advanced 2024 Stat Blocks**: Procedurally generated ability scores with Saving Throws, Modifiers, and Proficiency Bonus (PB) scaling.
+- **Combat Precision**: Dynamic Initiative calculation, HP Dice Strings (e.g., `55 (10d8 + 10)`), and CR-based stat scaling.
+- **Procedural Lore & Mythos**: Unique, flavorful descriptions and legends for every creature forged.
+- **Categorized Abilities**: Organized Traits, Actions, Bonus Actions, and Reactions following the latest sourcebook standards.
+- **Handbook Aesthetic**: A stunning, parchment-style UI with color-coded keywords and bold typography.
+- **Bestiary Export**: Save your forged monsters as high-quality PDFs for your gaming table.
 
-## 🚀 Live Deployment (Vercel/Netlify)
-This project is ready for one-click deployment.
+## Deployment
 
-### Deploying to Vercel
-1. Push this folder to a GitHub repository.
-2. Connect your repository to [Vercel](https://vercel.com).
-3. Vercel will automatically detect the `vercel.json` and set up the `/api` serverless functions.
-4. Your site is now live with full AI image support!
+LoreForge is optimized for live web environments and can be deployed instantly to platforms like **Vercel** or **GitHub Pages**.
 
-## 🧪 Local Development
-To run this project locally with full AI functionality (bypassing browser security):
-1. Install a simple server: `npx serve .`
-2. Open `localhost:3000` in your browser.
+### One-Click Generation
+Use the **"Forge Monster"** button to create a creature tailored to your selected type, CR, and environment, or leave it to fate with **"Pure Random"**.
 
-## 📜 Credits
-- **UI/UX Design**: LoreForge Engine
-- **Image Generation**: Powered by Pollinations.ai
-- **PDF Engine**: html2pdf.js
+---
+
+*&copy; 2024 LoreForge Engine | Advanced Stat Block Bestiary*
