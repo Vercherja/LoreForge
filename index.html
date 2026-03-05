@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoreForge | The Ultimate RPG Monster Generator</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Generate high-fidelity, handbook-style RPG monsters with procedural lore, stats, and AI-powered portraits. Perfect for D&D GMs and worldbuilders.">
+    <meta name="keywords" content="RPG, Monster Generator, D&D, 5e, Bestiary, LoreForge, AI Art, TTRPG Tools">
+    <meta name="author" content="LoreForge Engine">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://loreforge.io/">
+    <meta property="og:title" content="LoreForge | The Ultimate RPG Monster Generator">
+    <meta property="og:description"
+        content="Forge legendary creatures for your campaign. High-fidelity stats, procedural lore, and AI-manifested portraits.">
+    <meta property="og:image" content="assets/dragon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="LoreForge | The Ultimate RPG Monster Generator">
+    <meta property="twitter:description"
+        content="Forge legendary creatures for your campaign with procedural lore and AI art.">
+    <meta property="twitter:image" content="assets/dragon.png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+    <div id="app" class="app-container">
+        <header class="main-header">
+            <h1 class="logo">LORE<span>FORGE</span></h1>
+            <p class="subtitle">Procedural Beastmaster & Grimoire</p>
+        </header>
+
+        <main class="dashboard">
+            <!-- Left Panel: Controls -->
+            <section class="controls-panel card">
+                <div class="panel-header">
+                    <h2>Generator Toolkit</h2>
+                </div>
+
+                <div class="control-group">
+                    <label for="monster-type">Creature Type</label>
+                    <select id="monster-type" class="custom-select">
+                        <option value="random">Pure Random</option>
+                        <option value="aberration">Aberration</option>
+                        <option value="beast">Beast</option>
+                        <option value="construct">Construct</option>
+                        <option value="dragon">Dragon</option>
+                        <option value="elemental">Elemental</option>
+                        <option value="fey">Fey</option>
+                        <option value="fiend">Fiend</option>
+                        <option value="giant">Giant</option>
+                        <option value="monstrosity">Monstrosity</option>
+                        <option value="ooze">Ooze</option>
+                        <option value="plant">Plant</option>
+                        <option value="undead">Undead</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="challenge-rating">Challenge Rating (CR)</label>
+                    <div class="range-container">
+                        <input type="range" id="challenge-rating" min="0" max="30" step="1" value="3">
+                        <span id="cr-display">3</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="environment">Environment</label>
+                    <select id="environment" class="custom-select">
+                        <option value="any">Any Environment</option>
+                        <option value="arctic">Arctic</option>
+                        <option value="coastal">Coastal</option>
+                        <option value="desert">Desert</option>
+                        <option value="forest">Forest</option>
+                        <option value="grassland">Grassland</option>
+                        <option value="mountain">Mountain</option>
+                        <option value="swamp">Swamp</option>
+                        <option value="underdark">Underdark</option>
+                        <option value="underwater">Underwater</option>
+                        <option value="urban">Urban</option>
+                    </select>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="generate-btn" class="btn primary-btn">
+                        <span class="btn-icon">⚡</span> Forge Monster
+                    </button>
+                    <button id="random-btn" class="btn secondary-btn">
+                        <span class="btn-icon">🎲</span> Pure Random
+                    </button>
+                </div>
+
+                <div id="card-actions" class="hidden" style="margin-top: 2rem;">
+                    <button id="generate-image-btn" class="btn btn-accent"
+                        style="width: 100%; margin-bottom: 1rem; border: 1px solid var(--clr-accent); color: var(--clr-accent); background: transparent;">✨
+                        Manifest Portrait</button>
+                    <button id="export-pdf-btn" class="btn secondary-btn" style="width: 100%;">📜 Save as PDF</button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Monster Display -->
+            <section class="display-panel">
+                <div id="monster-page-container">
+                    <div id="monster-card" class="monster-card empty-state">
+                        <div class="ritual-placeholder">
+                            <div class="rune-circle"></div>
+                            <p>The grimoire awaits your command...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <p>&copy; 2024 LoreForge Engine | Powered by Nano Banana AI</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>

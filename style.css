@@ -1,0 +1,431 @@
+:root {
+    /* Color Palette - Dark Fantasy / Tome Aesthetic */
+    --clr-bg: #0f0c0a;
+    --clr-surface: #1e1a16;
+    --clr-accent: #d4af37;
+    /* Antique Gold */
+    --clr-accent-hover: #ffdf00;
+    --clr-text-primary: #e0d8c3;
+    /* Off-white Parchment text */
+    --clr-text-secondary: #a89f8d;
+    --clr-text-muted: #6b5e4c;
+    --clr-border: #3d3428;
+    --clr-overlay: rgba(0, 0, 0, 0.7);
+    --clr-danger: #8b0000;
+
+    /* Typography */
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-stat: 'Crimson Pro', serif;
+
+    /* Shadows & Effects */
+    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.6);
+    --glass-bg: rgba(30, 26, 22, 0.7);
+    --glass-border: rgba(212, 175, 55, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--clr-bg);
+    color: var(--clr-text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(45, 34, 18, 0.2) 0%, transparent 70%),
+        url('https://www.transparenttextures.com/patterns/dark-leather.png');
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+.main-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    letter-spacing: 0.2rem;
+    color: var(--clr-text-primary);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.logo span {
+    color: var(--clr-accent);
+}
+
+.subtitle {
+    font-family: var(--font-heading);
+    color: var(--clr-text-secondary);
+    font-size: 1rem;
+    letter-spacing: 0.3rem;
+    text-transform: uppercase;
+}
+
+/* Dashboard Layout */
+.dashboard {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    flex: 1;
+}
+
+@media (max-width: 1000px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Cards & Panels */
+.card {
+    background-color: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: 4px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--clr-accent), transparent);
+}
+
+.panel-header h2 {
+    font-family: var(--font-heading);
+    color: var(--clr-accent);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--clr-border);
+    padding-bottom: 1rem;
+}
+
+/* Controls */
+.control-group {
+    margin-bottom: 1.5rem;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+    color: var(--clr-text-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 0.05rem;
+}
+
+.custom-select {
+    width: 100%;
+    background-color: #12100e;
+    border: 1px solid var(--clr-border);
+    color: var(--clr-text-primary);
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: border-color 0.3s ease;
+}
+
+.custom-select:focus {
+    border-color: var(--clr-accent);
+    outline: none;
+}
+
+.range-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+input[type="range"] {
+    flex: 1;
+    accent-color: var(--clr-accent);
+    cursor: pointer;
+}
+
+#cr-display {
+    min-width: 2rem;
+    text-align: right;
+    font-family: var(--font-heading);
+    color: var(--clr-accent);
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+.primary-btn {
+    background-color: var(--clr-accent);
+    color: #000;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.primary-btn:hover {
+    background-color: var(--clr-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--clr-text-secondary);
+    border: 1px solid var(--clr-border);
+    width: 100%;
+}
+
+.secondary-btn:hover {
+    border-color: var(--clr-accent);
+    color: var(--clr-accent);
+}
+
+/* Display Panel */
+.display-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.monster-card {
+    background: #fdfaf0;
+    /* Parchment Color */
+    background-image: url('https://www.transparenttextures.com/patterns/papyros.png');
+    border: 1px solid #d4af37;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    color: #2e2e2e;
+    overflow-y: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 800px;
+    max-width: 900px;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+    position: relative;
+    border-radius: 2px;
+}
+
+.monster-header-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2.5rem;
+    border-bottom: 2px solid #8b0000;
+}
+
+.monster-lore-column {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.monster-lore-column h2 {
+    font-family: 'Cinzel', serif;
+    color: #8b0000;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #8b0000;
+}
+
+.monster-image-container {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: #000;
+    border: 4px solid #8b0000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+}
+
+.monster-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Illustration */
+.illustration-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: #000;
+    border-bottom: 2px solid var(--clr-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.monster-image-placeholder {
+    color: var(--clr-text-muted);
+    font-family: var(--font-heading);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
+
+.image-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 10;
+    background: var(--clr-overlay);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--clr-accent);
+    color: var(--clr-accent);
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+}
+
+.image-btn:hover {
+    background: var(--clr-accent);
+    color: #000;
+}
+
+/* Stat Block Styling - 5E Inspired */
+.stat-block-container {
+    padding: 2.5rem;
+    color: #2e2e2e;
+    font-family: var(--font-stat);
+    background: transparent;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
+
+.stat-block-column h3 {
+    color: #8b0000;
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+    border-bottom: 2px solid #8b0000;
+}
+
+/* Footer Actions */
+.card-footer {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    border-top: 1px solid var(--clr-border);
+    margin-top: auto;
+}
+
+.text-btn {
+    background: transparent;
+    color: var(--clr-text-secondary);
+    padding: 0.5rem;
+    font-size: 0.7rem;
+    border: none;
+}
+
+.text-btn:hover {
+    color: var(--clr-accent);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Global Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@media print {
+    body {
+        background: white !important;
+    }
+
+    .app-container {
+        padding: 0;
+    }
+
+    .sidebar,
+    .main-header,
+    .main-footer,
+    #card-actions {
+        display: none !important;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 0;
+    }
+
+    .monster-card {
+        box-shadow: none;
+        border: none;
+        width: 100%;
+    }
+}
+
+.rune-circle {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed var(--clr-accent);
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    animation: rotate 20s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
